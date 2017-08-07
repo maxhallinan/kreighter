@@ -28,14 +28,14 @@ const author = 'Oliver Wendell Holmes, Jr.'
 const text = 'other tools are needed besides logic';
 createBar(author, text);
 // {
-// 	type: 'CREATE_BAR',
-// 	author, 'Oliver Wendel Holmes, Jr.',
-// 	text: 'other tools are needed besides logic.',
+//  type: 'CREATE_BAR',
+//  author, 'Oliver Wendel Holmes, Jr.',
+//  text: 'other tools are needed besides logic.',
 // }
 
 const destroy = kreighter.fromMap(
-	{ foo: 'DESTROY_FOO', bar: 'DESTROY_BAR', baz: 'DESTROY_BAZ', }
-	id => ({ id, }));
+  { foo: 'DESTROY_FOO', bar: 'DESTROY_BAR', baz: 'DESTROY_BAZ', }
+  id => ({ id, }));
 destroy.foo(1)
 // { type: 'DESTROY_FOO', id: 1, }
 destroy.bar(1);
