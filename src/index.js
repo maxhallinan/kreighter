@@ -1,3 +1,9 @@
-const kreeater = x => x;
+export function fromType(type, withValues) {
+  return function actionCreator() {};
+}
 
-export default kreeater;
+export function fromMap(typeMap, withValues) {
+  return {};
+}
+
+export default { fromType, fromMap, };

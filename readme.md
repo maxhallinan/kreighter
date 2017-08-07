@@ -8,7 +8,7 @@ A utility for generating Redux action creators.
 ## Install
 
 ```
-$ npm install kreighter
+$ npm install --save kreighter
 ```
 
 
