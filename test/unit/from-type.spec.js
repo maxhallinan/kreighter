@@ -8,10 +8,6 @@ describe('kreeater > fromType', function () {
     assert.throws(() => fromType(ACTION_TYPE, {}));
   });
 
-  it('Throws an error if withValues does not return an object.', function () {
-    assert.throws(() => fromType(ACTION_TYPE, () => []));
-  });
-
   it('Returns a function.', function () {
     const actionCreator = fromType(ACTION_TYPE);
 
@@ -41,7 +37,7 @@ describe('kreeater > fromType', function () {
     const action = actionCreator(expected.foo, expected.bar, expected.baz);
     const actionKeys = Object.keys(action);
 
-    assert.equal(expected.length, actionKeys.length);
+    assert.equal(expectedKeys.length, actionKeys.length);
     actionKeys.forEach(k => assert.equal(expected[k], action[k]))
   });
 });

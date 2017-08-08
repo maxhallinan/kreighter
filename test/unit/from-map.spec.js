@@ -43,7 +43,7 @@ describe('kreeater > fromMap', function () {
     const actionCreators = fromMap(typeMap);
     const typeKeys = Object.keys(typeMap);
 
-    typeKeys.forEach(k => assert.isEqual((actionCreators[k]()).type, typeMap[k]));
+    typeKeys.forEach(k => assert.equal((actionCreators[k]()).type, typeMap[k]));
   });
 
   it('Each function returns an action with the expected values.', function () {
@@ -64,7 +64,7 @@ describe('kreeater > fromMap', function () {
       const expectedKeys = Object.keys(expected);
       const actionKeys = Object.keys(action);
 
-      assert.equal(Object.keys(e).length, actionKeys.length);
+      assert.equal(Object.keys(expected).length, actionKeys.length);
       actionKeys.forEach(k => assert.equal(expected[k], action[k]))
     });
   });
