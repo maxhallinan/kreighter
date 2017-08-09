@@ -7,10 +7,14 @@
     "extends": "eslint:recommended",
     "globals": {
       "before": true,
-      "describe": true, 
+      "describe": true,
       "it": true
     },
     "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+          "experimentalObjectRestSpread": true
+        },
         "sourceType": "module"
     },
     "rules": {

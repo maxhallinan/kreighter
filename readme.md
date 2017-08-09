@@ -1,7 +1,5 @@
 # kreighter
 
-*Work in progress.*
-
 A utility for generating Redux action creators.
 
 
@@ -15,7 +13,7 @@ $ npm install --save kreighter
 ## Usage
 
 ```js
-import { fromMap, fromType } from 'kreighter';
+import { fromMap, fromType, } from 'kreighter';
 
 const toggleFoo = fromType('TOGGLE_FOO');
 toggleFoo(); // { type: 'TOGGLE_FOO', }
@@ -56,7 +54,7 @@ to use a string constant.
 
 #### withValues
 
-Type: `(a, ..., z) -> Object`<br>
+Type: `* -> Object`<br>
 Default: `undefined`
 
 A function that maps action creator arguments to an object that is merged
@@ -77,7 +75,7 @@ is used as the key for the corresponding action creator on the returned object m
 
 #### withValues
 
-Type: `(a, ..., z) -> Object`<br>
+Type: `* -> Object`<br>
 Default: `undefined`
 
 A function that maps action creator arguments to an object that is merged
