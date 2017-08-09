@@ -7,7 +7,7 @@ export default function fromType(type, withValues=emptyValues) {
       `Please check the first argument. \`type\` must be defined.`);
   }
 
-  if (!isFunction(withValues)) {
+  if (!isUndefined(withValues) && !isFunction(withValues)) {
     throw new TypeError(
       `Please check the second argument. \`withValues\` must be a function.`);
   }

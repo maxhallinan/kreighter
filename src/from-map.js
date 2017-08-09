@@ -1,5 +1,5 @@
-import { emptyValues, toCreator, } from './creator';
-import { entries, isFunction, isObject, } from './util';
+import { toCreator, } from './creator';
+import { entries, isFunction, isObject, isUndefined, } from './util';
 
 const mapTypeToCreator = withValues => ([ key, type, ]) =>
   ({ [key]: toCreator(type, withValues), });
@@ -7,13 +7,13 @@ const mapTypeToCreator = withValues => ([ key, type, ]) =>
 const combineCreators = (combined, creator) =>
   Object.assign(combined, creator);
 
-export default function fromMap(typeMap, withValues=emptyValues) {
+export default function fromMap(typeMap, withValues) {
   if (!isObject(typeMap)) {
     throw new TypeError(
       `Please check the first argument. \`typeMap\` must be an object.`);
   }
 
-  if (!isFunction(withValues)) {
+  if (!isUndefined(withValues) && !isFunction(withValues)) {
     throw new TypeError(
       `Please check the second argument. \`withValues\` must be a function.`);
   }

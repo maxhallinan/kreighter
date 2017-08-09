@@ -1,6 +1,6 @@
-export const emptyValues = () => ({});
+const emptyValues = () => ({});
 
-export function toCreator(type, withValues) {
+export function toCreator(type, withValues=emptyValues) {
   return function actionCreator(...args) {
     return {
       ...withValues(...args),
