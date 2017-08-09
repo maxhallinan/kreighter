@@ -1,5 +1,7 @@
 # kreighter
 
+[![Build Status](https://travis-ci.org/maxhallinan/kreighter.svg?branch=master)](https://travis-ci.org/maxhallinan/kreighter)
+
 A utility for generating Redux action creators.
 
 
