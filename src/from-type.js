@@ -1,7 +1,7 @@
-import { emptyValues, toCreator, } from './creator';
+import { toCreator, } from './creator';
 import { isFunction, isUndefined, } from './util';
 
-export default function fromType(type, withValues=emptyValues) {
+export default function fromType(type, withValues) {
   if (isUndefined(type)) {
     throw new TypeError(
       `Please check the first argument. \`type\` must be defined.`);
