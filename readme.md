@@ -56,7 +56,7 @@ to use a string constant.
 
 #### withValues
 
-Type: `(a, ..., z) -> { k: a }`<br>
+Type: `(a, ..., z) -> Object`<br>
 Default: `undefined`
 
 A function that maps action creator arguments to an object that is merged
@@ -77,7 +77,7 @@ is used as the key for the corresponding action creator on the returned object m
 
 #### withValues
 
-Type: `(a, ..., z) -> { k: a }`<br>
+Type: `(a, ..., z) -> Object`<br>
 Default: `undefined`
 
 A function that maps action creator arguments to an object that is merged
