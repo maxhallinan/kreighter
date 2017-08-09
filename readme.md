@@ -1,6 +1,7 @@
 # kreighter
 
 [![Build Status](https://travis-ci.org/maxhallinan/kreighter.svg?branch=master)](https://travis-ci.org/maxhallinan/kreighter)
+[![Coverage Status](https://coveralls.io/repos/github/maxhallinan/kreighter/badge.svg)](https://coveralls.io/github/maxhallinan/kreighter)
 
 A utility for generating Redux action creators.
 
