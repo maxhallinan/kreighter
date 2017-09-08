@@ -23,6 +23,7 @@ const toggleFoo = fromType('TOGGLE_FOO');
 toggleFoo(); // { type: 'TOGGLE_FOO', }
 
 const formatTitle = (id, title) => ({ id, title: toTitleCase(title), });
+
 const updateTitle = fromType('UPDATE_TITLE', formatTitle);
 updateTitle('foo bar baz'); // { type: 'UPDATE_TITLE', title: 'Foo Bar Baz', }
 
