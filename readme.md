@@ -58,8 +58,7 @@ to use a string constant.
 
 #### withFields
 
-Type: `[String] | (*...) -> Object`<br>
-Default: `undefined`
+Type: `[String] | (*...) -> Object`
 
 Arbitrary fields can be set on the action through the `withFields` option.
 `withFields` supports one of two types:
@@ -89,8 +88,7 @@ is used as the key for the corresponding action creator on the returned object m
 
 #### withFields
 
-Type: `[String] | (*...) -> Object`<br>
-Default: `undefined`
+Type: `[String] | (*...) -> Object`
 
 Arbitrary fields can be set on the action through the `withFields` option.
 `withFields` supports one of two types:
