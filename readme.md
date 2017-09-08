@@ -29,8 +29,8 @@ import { fromType, } from 'kreighter';
 
 const fetchBarSuccess = fromType('FETCH_BAR_SUCCESS', [ 'id', 'response', ]);
 
-fetchFooSuccess(1, {/*...*/});
-// -> { type: 'FETCH_BAR_SUCCESS', id: 1, response: {/*...*/}, }
+fetchFooSuccess(1, { ... });
+// -> { type: 'FETCH_BAR_SUCCESS', id: 1, response: { ... }, }
 ```
 
 ```javascript
