@@ -8,7 +8,7 @@ describe(`kreeater > fromType`, function () {
     assert.throws(() => fromType());
   });
 
-  it(`Throws an error if withValues is not a function.`, function () {
+  it(`Throws an error if \`withFields\` is not an array or a function.`, function () {
     assert.throws(() => fromType(ACTION_TYPE, {}));
   });
 
@@ -27,7 +27,7 @@ describe(`kreeater > fromType`, function () {
     assert.equal(Object.keys(action).length, 1);
   });
 
-  it(`Returns a function that returns an action with the expected values.`, function () {
+  it(`Returns a function that returns an action with the expected values from a given \`fields\` array.`, function () {
     const expected = {
       type: ACTION_TYPE,
       foo: `foo`,
@@ -35,9 +35,27 @@ describe(`kreeater > fromType`, function () {
       baz: `baz`,
     };
     const expectedKeys = Object.keys(expected);
-    const withValues = (foo, bar, baz) => ({ foo, bar, baz, });
+    const withFields = [ `foo`, `bar`, `baz`, ];
 
-    const actionCreator = fromType(ACTION_TYPE, withValues);
+    const actionCreator = fromType(ACTION_TYPE, withFields);
+    const action = actionCreator(expected.foo, expected.bar, expected.baz);
+    const actionKeys = Object.keys(action);
+
+    assert.equal(expectedKeys.length, actionKeys.length);
+    actionKeys.forEach(k => assert.equal(expected[k], action[k]));
+  });
+
+  it(`Returns a function that returns an action with the expected values from a given \`fields\` function.`, function () {
+    const expected = {
+      type: ACTION_TYPE,
+      foo: `foo`,
+      bar: `bar`,
+      baz: `baz`,
+    };
+    const expectedKeys = Object.keys(expected);
+    const withFields = (foo, bar, baz) => ({ foo, bar, baz, });
+
+    const actionCreator = fromType(ACTION_TYPE, withFields);
     const action = actionCreator(expected.foo, expected.bar, expected.baz);
     const actionKeys = Object.keys(action);
 

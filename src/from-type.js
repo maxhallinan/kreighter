@@ -1,16 +1,16 @@
 import { toCreator, } from './creator';
-import { isFunction, isUndefined, } from './util';
+import { isArray, isFunction, isUndefined, } from './util';
 
-export default function fromType(type, withValues) {
+export default function fromType(type, withFields) {
   if (isUndefined(type)) {
     throw new TypeError(
       `Please check the first argument. \`type\` must be defined.`);
   }
 
-  if (!isUndefined(withValues) && !isFunction(withValues)) {
+  if (!isUndefined(withFields) && !(isArray(withFields) || isFunction(withFields))) {
     throw new TypeError(
-      `Please check the second argument. \`withValues\` must be a function.`);
+      `Please check the second argument. \`withFields\` must be an array or a function.`);
   }
 
-  return toCreator(type, withValues);
+  return toCreator(type, withFields);
 }

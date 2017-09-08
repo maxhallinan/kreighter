@@ -1,25 +1,25 @@
 import { toCreator, } from './creator';
-import { entries, isFunction, isObject, isUndefined, } from './util';
+import { entries, isArray, isFunction, isObject, isUndefined, } from './util';
 
-const mapTypeToCreator = withValues => ([ key, type, ]) =>
-  ({ [key]: toCreator(type, withValues), });
+const mapTypeToCreator = (withFields) => ([ key, type, ]) =>
+  ({ [key]: toCreator(type, withFields), });
 
 const combineCreators = (combined, creator) =>
   Object.assign(combined, creator);
 
-export default function fromMap(typeMap, withValues) {
+export default function fromMap(typeMap, withFields) {
   if (!isObject(typeMap)) {
     throw new TypeError(
       `Please check the first argument. \`typeMap\` must be an object.`);
   }
 
-  if (!isUndefined(withValues) && !isFunction(withValues)) {
+  if (!isUndefined(withFields) && !(isFunction(withFields) || isArray(withFields))) {
     throw new TypeError(
-      `Please check the second argument. \`withValues\` must be a function.`);
+      `Please check the second argument. \`withFields\` must be an array or a function.`);
   }
 
   const creators = entries(typeMap)
-    .map(mapTypeToCreator(withValues))
+    .map(mapTypeToCreator(withFields))
     .reduce(combineCreators, {});
 
   return creators;

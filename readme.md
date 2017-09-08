@@ -15,16 +15,16 @@ $ npm install --save kreighter
 
 ## Usage
 
-```js
+```javascript
 import { fromMap, fromType, } from 'kreighter';
+import { toTitleCase, } from './util';
 
 const toggleFoo = fromType('TOGGLE_FOO');
 toggleFoo(); // { type: 'TOGGLE_FOO', }
 
-const setId = id => ({ id, });
-
-const destroyFoo = fromType('DESTROY_FOO', setId);
-destroyFoo(1); // { type: 'DESTROY_FOO', id: 1, }
+const formatTitle = (id, title) => ({ id, title: toTitleCase(title), });
+const updateTitle = fromType('UPDATE_TITLE', formatTitle);
+updateTitle('foo bar baz'); // { type: 'UPDATE_TITLE', title: 'Foo Bar Baz', }
 
 const destroy = fromMap(
   {
@@ -32,7 +32,7 @@ const destroy = fromMap(
     bar: 'DESTROY_BAR',
     baz: 'DESTROY_BAZ',
   },
-  setId
+  [ 'id', ],
 );
 destroy.foo(1); // { type: 'DESTROY_FOO', id: 1, }
 destroy.bar(2); // { type: 'DESTROY_BAR', id: 2, }
@@ -42,10 +42,10 @@ destroy.baz(3); // { type: 'DESTROY_BAZ', id: 3, }
 
 ## API
 
-### fromType(type, withValues)
+### fromType(type, withFields)
 
-Takes an action type and an optional map function. Returns an action creator for
-the given action type.
+Takes an action type and an optional action fields definition. Returns an
+action creator for the given action type.
 
 #### type
 
@@ -55,16 +55,26 @@ The value set as the action's `type` property. The type of `type` is not
 enforced but there are [good reasons](http://redux.js.org/docs/faq/Actions.html#why-should-type-be-a-string-or-at-least-serializable-why-should-my-action-types-be-constants)
 to use a string constant.
 
-#### withValues
+#### withFields
 
-Type: `* -> Object`<br>
+Type: `[String] | (*...) -> Object`<br>
 Default: `undefined`
 
-A function that maps action creator arguments to an object that is merged
-with the created action.
+Arbitrary fields can be set on the action through the `withFields` option.
+`withFields` supports one of two types:
+
+- An array of field names.
+- A function that returns an arbitrary object.
+
+If `withFields` is an array, each action creator argument is paired with the field
+name in the same position, and this set of key/value pairs is merged into the
+created action.
+
+If `withFields` is a function, it should map action creator arguments to an arbitrary
+object that is merged with the created action.
 
 
-### fromMap(typeMap, withValues)
+### fromMap(typeMap, withFields)
 
 Takes an object map of action types and an optional map function. Returns
 an object map of action creators, one for each action type.
@@ -76,13 +86,23 @@ Type: `{ k: String }`
 An object map of arbitrary keys and action type values. The key for each action type
 is used as the key for the corresponding action creator on the returned object map.
 
-#### withValues
+#### withFields
 
-Type: `* -> Object`<br>
+Type: `[String] | (*...) -> Object`<br>
 Default: `undefined`
 
-A function that maps action creator arguments to an object that is merged
-with the created action.
+Arbitrary fields can be set on the action through the `withFields` option.
+`withFields` supports one of two types:
+
+- An array of field names.
+- A function that returns an arbitrary object.
+
+If `withFields` is an array, each action creator argument is paired with the field
+name in the same position, and this set of key/value pairs is merged into the
+created action.
+
+If `withFields` is a function, it should map action creator arguments to an arbitrary
+object that is merged with the created action.
 
 
 ## License

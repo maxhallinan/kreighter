@@ -12,7 +12,7 @@ describe(`kreeater > fromMap`, function () {
     assert.throws(() => fromMap([]));
   });
 
-  it(`Throws an error if withValues is not a function.`, function () {
+  it(`Throws an error if \`withFields\` is not a function.`, function () {
     assert.throws(() => fromMap(typeMap, {}));
   });
 
@@ -42,7 +42,30 @@ describe(`kreeater > fromMap`, function () {
     typeKeys.forEach(k => assert.equal((actionCreators[k]()).type, typeMap[k]));
   });
 
-  it(`Each function returns an action with the expected values.`, function () {
+  it(`Each function returns an action with the expected values from a given \`withFields\` list.`, function () {
+    const withValues = [ `foo`, `bar`, `baz`, ];
+
+    const actionCreators = fromMap(typeMap, withValues);
+
+    Object.keys(typeMap).map(k => {
+      const expected = {
+        type: typeMap[k],
+        foo: `foo`,
+        bar: `bar`,
+        baz: `baz`,
+      };
+      const creator = actionCreators[k];
+      const action = creator(expected.foo, expected.bar, expected.baz);
+
+      const expectedKeys = Object.keys(expected);
+      const actionKeys = Object.keys(action);
+
+      assert.equal(expectedKeys.length, actionKeys.length);
+      actionKeys.forEach(k => assert.equal(expected[k], action[k]));
+    });
+  });
+
+  it(`Each function returns an action with the expected values from a given \`withFields\` function.`, function () {
     const withValues = (foo, bar, baz) => ({ foo, bar, baz, });
 
     const actionCreators = fromMap(typeMap, withValues);
