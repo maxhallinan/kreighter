@@ -16,16 +16,40 @@ $ npm install --save kreighter
 ## Usage
 
 ```javascript
-import { fromMap, fromType, } from 'kreighter';
-import { toTitleCase, } from './util';
+import { fromType, } from 'kreighter';
 
 const toggleFoo = fromType('TOGGLE_FOO');
-toggleFoo(); // { type: 'TOGGLE_FOO', }
 
-const formatTitle = (id, title) => ({ id, title: toTitleCase(title), });
+toggleFoo();
+// -> { type: 'TOGGLE_FOO', }
+```
 
-const updateTitle = fromType('UPDATE_TITLE', formatTitle);
-updateTitle(1, 'foo bar baz'); // { type: 'UPDATE_TITLE', id: 1, title: 'Foo Bar Baz', }
+```javascript
+import { fromType, } from 'kreighter';
+
+const fetchBarSuccess = fromType('FETCH_BAR_SUCCESS', [ 'id', 'response', ]);
+
+fetchFooSuccess(1, {/*...*/});
+// -> { type: 'FETCH_BAR_SUCCESS', id: 1, response: {/*...*/}, }
+```
+
+```javascript
+import { fromType, } from 'kreighter';
+import { toTitleCase, } from './util';
+
+const formatTitle = (id, title) => ({
+  id,
+  title: toTitleCase(title),
+});
+
+const updateBazTitle = fromType('UPDATE_BAZ_TITLE', formatTitle);
+
+updateBazTitle(1, 'foo bar baz');
+// -> { type: 'UPDATE_BAZ_TITLE', id: 1, title: 'Foo Bar Baz', }
+```
+
+```javascript
+import { fromMap, } from 'kreighter';
 
 const destroy = fromMap(
   {
@@ -33,11 +57,11 @@ const destroy = fromMap(
     bar: 'DESTROY_BAR',
     baz: 'DESTROY_BAZ',
   },
-  [ 'id', ],
-);
-destroy.foo(1); // { type: 'DESTROY_FOO', id: 1, }
-destroy.bar(2); // { type: 'DESTROY_BAR', id: 2, }
-destroy.baz(3); // { type: 'DESTROY_BAZ', id: 3, }
+  [ 'id', ]);
+
+destroy.foo(1); // -> { type: 'DESTROY_FOO', id: 1, }
+destroy.bar(2); // -> { type: 'DESTROY_BAR', id: 2, }
+destroy.baz(3); // -> { type: 'DESTROY_BAZ', id: 3, }
 ```
 
 
