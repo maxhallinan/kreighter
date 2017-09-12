@@ -2,7 +2,7 @@ import babel from 'rollup-plugin-babel';
 import babelrc from 'babelrc-rollup';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
-import uglify from 'rollup-plugin-uglify'; 
+import uglify from 'rollup-plugin-uglify';
 
 const pkg = require('./package.json');
 const env = process.env.NODE_ENV;
@@ -20,7 +20,7 @@ const config = {
   external,
   plugins,
   format: 'umd',
-  moduleName: 'redeuceur',
+  moduleName: 'kreighter',
 }
 
 if (env === 'production') {
